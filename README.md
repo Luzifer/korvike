@@ -1,3 +1,7 @@
+![license](https://badges.fyi/github/license/Luzifer/badge-gen)
+[![Go Report Card](https://goreportcard.com/badge/github.com/Luzifer/korvike)](https://goreportcard.com/report/github.com/Luzifer/korvike)
+[![Download on GoBuilder.me](https://badges.fyi/static/Download on/GoBuilder.me)](https://gobuilder.me/github.com/Luzifer/korvike)
+
 # Luzifer / korvike
 
 `korvike` is the finnish translation to the word "replacer" and that is what it does: It takes a Go template and executes it.
