@@ -12,3 +12,5 @@
 `echo "{{ .foo }}" | korvike -v foo=bar => "bar"`
 - Read environment variables and replace them inside the template:  
 `export FOO=bar; echo '{{env "FOO"}}' | korvike => "bar"`
+- Read a file and place it inside the template:  
+`echo "Hello World" > hello; echo '{{file "hello"}}' | korvike => "Hello World"`
