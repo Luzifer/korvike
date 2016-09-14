@@ -7,10 +7,10 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
-	"sync"
 	"text/template"
 
 	"github.com/Luzifer/go_helpers/env"
+	korvike "github.com/Luzifer/korvike/functions"
 	"github.com/Luzifer/rconfig"
 )
 
@@ -22,21 +22,8 @@ var (
 		VersionAndExit bool     `flag:"version" default:"false" description:"Prints current version and exits"`
 	}{}
 
-	templateFunctions     = template.FuncMap{}
-	templateFunctionsLock sync.Mutex
-
 	version = "dev"
 )
-
-func registerFunction(name string, f interface{}) error {
-	templateFunctionsLock.Lock()
-	defer templateFunctionsLock.Unlock()
-	if _, ok := templateFunctions[name]; ok {
-		return errors.New("Duplicate function for name " + name)
-	}
-	templateFunctions[name] = f
-	return nil
-}
 
 func init() {
 	if err := rconfig.Parse(&cfg); err != nil {
@@ -85,7 +72,7 @@ func main() {
 		log.Fatalf("Unable to read from input: %s", err)
 	}
 
-	tpl, err := template.New("in").Funcs(templateFunctions).Parse(string(rawTpl))
+	tpl, err := template.New("in").Funcs(korvike.GetFunctionMap()).Parse(string(rawTpl))
 	if err != nil {
 		log.Fatalf("Unable to parse template: %s", err)
 	}
