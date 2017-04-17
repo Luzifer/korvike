@@ -7,14 +7,32 @@
 
 ## Available functions
 
-- Take key-value pairs from the CLI and replace them inside the template:  
-`echo "{{ .foo }}" | korvike -v foo=bar => "bar"`
-- Read environment variables and replace them inside the template:  
-`export FOO=bar; echo '{{env "FOO"}}' | korvike => "bar"`
-- Read a file and place it inside the template:  
-`echo "Hello World" > hello; echo '{{file "hello"}}' | korvike => "Hello World"`
-- Format the current date into the template (uses [Go time format](https://golang.org/pkg/time/#Time.Format)):  
-`echo '{{now "2006-01-02 15:04:05"}}' | korvike => "2017-04-17 16:27:34"`
+- `{{ .<variable name> }}`  
+  Take key-value pairs from the CLI and replace them inside the template
+  ```bash
+  # echo "{{ .foo }}" | korvike -v foo=bar
+  bar
+  ```
+- `{{ env <variable name> [default value] }}`  
+  Read environment variables and replace them inside the template
+  ```bash
+  # export FOO=bar
+  # echo '{{env "FOO"}}' | korvike
+  bar
+  ```
+- `{{ file <file name> [default value] }}`  
+  Read a file and place it inside the template
+  ```bash
+  # echo "Hello World" > hello
+  # echo '{{file "hello"}}' | korvike
+  Hello World
+  ```
+- `{{ now <format string> }}`  
+  Format the current date into the template (uses [Go time format](https://golang.org/pkg/time/#Time.Format))
+  ```bash
+  # echo '{{now "2006-01-02 15:04:05"}}' | korvike
+  2017-04-17 16:27:34
+  ```
 
 ----
 
