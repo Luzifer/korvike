@@ -1,3 +1,7 @@
+# 0.3.0 / 2017-04-17
+
+  * Add 'now' function and function tests
+
 # 0.2.1 / 2017-02-14
 
   * Add builder config
