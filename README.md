@@ -15,3 +15,7 @@
 `echo "Hello World" > hello; echo '{{file "hello"}}' | korvike => "Hello World"`
 - Format the current date into the template (uses [Go time format](https://golang.org/pkg/time/#Time.Format)):  
 `echo '{{now "2006-01-02 15:04:05"}}' | korvike => "2017-04-17 16:27:34"`
+
+----
+
+![project status](https://d2o84fseuhwkxk.cloudfront.net/korvike.svg)
