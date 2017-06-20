@@ -1,7 +1,7 @@
 {
 	"ImportPath": "github.com/Luzifer/korvike",
-	"GoVersion": "go1.7",
-	"GodepVersion": "v78",
+	"GoVersion": "go1.8",
+	"GodepVersion": "v79",
 	"Deps": [
 		{
 			"ImportPath": "github.com/Luzifer/go_helpers/env",
@@ -14,8 +14,123 @@
 			"Rev": "c27bd3a64b5b19556914d9fec69922cf3852d585"
 		},
 		{
+			"ImportPath": "github.com/fatih/structs",
+			"Rev": "3fe2facc32a7fbde4b29c0f85604dc1dd22836d2"
+		},
+		{
+			"ImportPath": "github.com/hashicorp/errwrap",
+			"Rev": "7554cd9344cec97297fa6649b055a8c98c2a1e55"
+		},
+		{
+			"ImportPath": "github.com/hashicorp/go-cleanhttp",
+			"Rev": "ad28ea4487f05916463e2423a55166280e8254b5"
+		},
+		{
+			"ImportPath": "github.com/hashicorp/go-multierror",
+			"Rev": "d30f09973e19c1dfcd120b2d9c4f168e68d6b5d5"
+		},
+		{
+			"ImportPath": "github.com/hashicorp/go-rootcerts",
+			"Rev": "6bb64b370b90e7ef1fa532be9e591a81c3493e00"
+		},
+		{
+			"ImportPath": "github.com/hashicorp/hcl",
+			"Rev": "ef8133da8cda503718a74741312bf50821e6de79"
+		},
+		{
+			"ImportPath": "github.com/hashicorp/hcl/hcl/ast",
+			"Rev": "ef8133da8cda503718a74741312bf50821e6de79"
+		},
+		{
+			"ImportPath": "github.com/hashicorp/hcl/hcl/parser",
+			"Rev": "ef8133da8cda503718a74741312bf50821e6de79"
+		},
+		{
+			"ImportPath": "github.com/hashicorp/hcl/hcl/scanner",
+			"Rev": "ef8133da8cda503718a74741312bf50821e6de79"
+		},
+		{
+			"ImportPath": "github.com/hashicorp/hcl/hcl/strconv",
+			"Rev": "ef8133da8cda503718a74741312bf50821e6de79"
+		},
+		{
+			"ImportPath": "github.com/hashicorp/hcl/hcl/token",
+			"Rev": "ef8133da8cda503718a74741312bf50821e6de79"
+		},
+		{
+			"ImportPath": "github.com/hashicorp/hcl/json/parser",
+			"Rev": "ef8133da8cda503718a74741312bf50821e6de79"
+		},
+		{
+			"ImportPath": "github.com/hashicorp/hcl/json/scanner",
+			"Rev": "ef8133da8cda503718a74741312bf50821e6de79"
+		},
+		{
+			"ImportPath": "github.com/hashicorp/hcl/json/token",
+			"Rev": "ef8133da8cda503718a74741312bf50821e6de79"
+		},
+		{
+			"ImportPath": "github.com/hashicorp/vault/api",
+			"Comment": "v0.7.0-190-g4490e93",
+			"Rev": "4490e93395fb70c3a25ade1fe88f363561a7d584"
+		},
+		{
+			"ImportPath": "github.com/hashicorp/vault/helper/compressutil",
+			"Comment": "v0.7.0-190-g4490e93",
+			"Rev": "4490e93395fb70c3a25ade1fe88f363561a7d584"
+		},
+		{
+			"ImportPath": "github.com/hashicorp/vault/helper/jsonutil",
+			"Comment": "v0.7.0-190-g4490e93",
+			"Rev": "4490e93395fb70c3a25ade1fe88f363561a7d584"
+		},
+		{
+			"ImportPath": "github.com/mitchellh/go-homedir",
+			"Rev": "981ab348d865cf048eb7d17e78ac7192632d8415"
+		},
+		{
+			"ImportPath": "github.com/mitchellh/mapstructure",
+			"Rev": "ca63d7c062ee3c9f34db231e352b60012b4fd0c1"
+		},
+		{
+			"ImportPath": "github.com/sethgrid/pester",
+			"Rev": "4f4c0a67b6496764028e1ab9fd8dfb630282ed2f"
+		},
+		{
 			"ImportPath": "github.com/spf13/pflag",
 			"Rev": "c7e63cf4530bcd3ba943729cee0efeff2ebea63f"
+		},
+		{
+			"ImportPath": "golang.org/x/net/http2",
+			"Rev": "dfe83d419c9403b40b19d08cdba2afec27b002f7"
+		},
+		{
+			"ImportPath": "golang.org/x/net/http2/hpack",
+			"Rev": "dfe83d419c9403b40b19d08cdba2afec27b002f7"
+		},
+		{
+			"ImportPath": "golang.org/x/net/idna",
+			"Rev": "dfe83d419c9403b40b19d08cdba2afec27b002f7"
+		},
+		{
+			"ImportPath": "golang.org/x/net/lex/httplex",
+			"Rev": "dfe83d419c9403b40b19d08cdba2afec27b002f7"
+		},
+		{
+			"ImportPath": "golang.org/x/text/secure/bidirule",
+			"Rev": "3491b61b9edc56653ad4333e605e2908e46a036b"
+		},
+		{
+			"ImportPath": "golang.org/x/text/transform",
+			"Rev": "3491b61b9edc56653ad4333e605e2908e46a036b"
+		},
+		{
+			"ImportPath": "golang.org/x/text/unicode/bidi",
+			"Rev": "3491b61b9edc56653ad4333e605e2908e46a036b"
+		},
+		{
+			"ImportPath": "golang.org/x/text/unicode/norm",
+			"Rev": "3491b61b9edc56653ad4333e605e2908e46a036b"
 		},
 		{
 			"ImportPath": "gopkg.in/yaml.v2",
