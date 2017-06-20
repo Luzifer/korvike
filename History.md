@@ -1,3 +1,7 @@
+# 0.4.1 / 2017-06-20
+
+  * Fix: New dependencies were missing in vendoring
+
 # 0.4.0 / 2017-06-20
 
   * Add `vault` template function
