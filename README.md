@@ -33,6 +33,13 @@
   # echo '{{now "2006-01-02 15:04:05"}}' | korvike
   2017-04-17 16:27:34
   ```
+- `{{ vault <path> <key> [default value] }}`  
+  Read a key from Vault using `VAULT_ADDR` and `VAULT_TOKEN` environment variables (or `~/.vault-token` file) for authentication.
+  ```bash
+  # vault write secret/test foo=bar
+  # echo '{{vault "secret/test" "foo"}}' | korvike
+  bar
+  ```
 
 ----
 
