@@ -1,3 +1,7 @@
+# 0.4.0 / 2017-06-20
+
+  * Add `vault` template function
+
 # 0.3.0 / 2017-04-17
 
   * Add 'now' function and function tests
