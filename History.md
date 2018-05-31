@@ -1,3 +1,8 @@
+# 0.5.0 / 2018-05-31
+
+  * Add b64encode as a function
+  * Fix Copyright line in LICENSE
+
 # 0.4.1 / 2017-06-20
 
   * Fix: New dependencies were missing in vendoring
