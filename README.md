@@ -1,5 +1,7 @@
-![license](https://badges.fyi/github/license/Luzifer/badge-gen)
 [![Go Report Card](https://goreportcard.com/badge/github.com/Luzifer/korvike)](https://goreportcard.com/report/github.com/Luzifer/korvike)
+![](https://badges.fyi/github/license/Luzifer/korvike)
+![](https://badges.fyi/github/downloads/Luzifer/korvike)
+![](https://badges.fyi/github/latest-release/Luzifer/korvike)
 
 # Luzifer / korvike
 
