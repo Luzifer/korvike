@@ -13,6 +13,12 @@
   # echo "{{ .foo }}" | korvike -v foo=bar
   bar
   ```
+- `{{ b64encode <string> }}`  
+  Encodes the string with base64 [StdEncoding](https://golang.org/pkg/encoding/base64/#pkg-variables)
+  ```console
+  # echo '{{ b64encode "Hello World" }}' | korvike
+  SGVsbG8gV29ybGQ=
+  ```
 - `{{ env <variable name> [default value] }}`  
   Read environment variables and replace them inside the template
   ```bash
