@@ -1,3 +1,10 @@
+# 0.6.0 / 2019-07-28
+
+  * Add AppRole support into `vault` function
+  * Add go modules support (remove old vendoring)
+  * README updates
+  * Replace build image
+
 # 0.5.0 / 2018-05-31
 
   * Add b64encode as a function
