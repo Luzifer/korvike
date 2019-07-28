@@ -1,6 +1,7 @@
 package functions
 
 import (
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -18,14 +19,10 @@ func init() {
 			return nil, fmt.Errorf("Key is not set")
 		}
 
-		client, err := api.NewClient(&api.Config{
-			Address: os.Getenv(api.EnvVaultAddress),
-		})
+		client, err := vaultClientFromEnvOrFile()
 		if err != nil {
 			return nil, err
 		}
-
-		client.SetToken(vaultTokenFromEnvOrFile())
 
 		secret, err := client.Logical().Read(name)
 		if err != nil {
@@ -46,16 +43,63 @@ func init() {
 	})
 }
 
-func vaultTokenFromEnvOrFile() string {
-	if token := os.Getenv(api.EnvVaultToken); token != "" {
-		return token
+func vaultClientFromEnvOrFile() (*api.Client, error) {
+	client, err := api.NewClient(&api.Config{
+		Address: os.Getenv(api.EnvVaultAddress),
+	})
+	if err != nil {
+		return nil, err
 	}
 
+	switch {
+
+	case os.Getenv(api.EnvVaultToken) != "":
+		client.SetToken(os.Getenv(api.EnvVaultToken))
+
+	case os.Getenv("VAULT_ROLE_ID") != "":
+		if err = setVaultTokenFromRoleID(client); err != nil {
+			return nil, fmt.Errorf("Unable to fetch VAULT_TOKEN: %s", err)
+		}
+
+	case hasTokenFile():
+		if f, err := homedir.Expand("~/.vault-token"); err == nil {
+			if b, err := ioutil.ReadFile(f); err == nil {
+				client.SetToken(string(b))
+			}
+		}
+
+	default:
+		return nil, errors.New("Neither VAULT_TOKEN nor VAULT_ROLE_ID was found in ENV and no ~/.vault-token file is present")
+
+	}
+
+	return client, nil
+}
+
+func hasTokenFile() bool {
 	if f, err := homedir.Expand("~/.vault-token"); err == nil {
-		if b, err := ioutil.ReadFile(f); err == nil {
-			return string(b)
+		if _, err := os.Stat(f); err == nil {
+			return true
 		}
 	}
 
-	return ""
+	return false
+}
+
+func setVaultTokenFromRoleID(client *api.Client) error {
+	data := map[string]interface{}{
+		"role_id": os.Getenv("VAULT_ROLE_ID"),
+	}
+
+	if os.Getenv("VAULT_SECRET_ID") != "" {
+		data["secret_id"] = os.Getenv("VAULT_SECRET_ID")
+	}
+
+	loginSecret, lserr := client.Logical().Write("auth/approle/login", data)
+	if lserr != nil || loginSecret.Auth == nil {
+		return fmt.Errorf("Unable to fetch authentication token: %s", lserr)
+	}
+
+	client.SetToken(loginSecret.Auth.ClientToken)
+	return nil
 }
