@@ -1,3 +1,7 @@
+# 0.6.1 / 2019-07-28
+
+  * Fix: Update repo-runner config for go modules
+
 # 0.6.0 / 2019-07-28
 
   * Add AppRole support into `vault` function
