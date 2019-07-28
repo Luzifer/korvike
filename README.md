@@ -48,7 +48,3 @@
   $ echo '{{ vault "secret/test" "foo" }}' | korvike
   bar
   ```
-
-----
-
-![project status](https://d2o84fseuhwkxk.cloudfront.net/korvike.svg)
