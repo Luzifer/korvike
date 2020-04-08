@@ -1,3 +1,7 @@
+# 0.7.1 / 2020-04-08
+
+  * Fix tests
+
 # 0.7.0 / 2020-04-08
 
   * Make blackfriday markdown available
