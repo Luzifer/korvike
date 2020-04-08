@@ -1,3 +1,7 @@
+# 0.7.0 / 2020-04-08
+
+  * Make blackfriday markdown available
+
 # 0.6.1 / 2019-07-28
 
   * Fix: Update repo-runner config for go modules
