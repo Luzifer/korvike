@@ -3,4 +3,4 @@ ci: test
 	bash golang.sh
 
 test:
-	go test -v ./functions
+	cd functions && go test -v
