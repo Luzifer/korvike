@@ -35,6 +35,12 @@
   $ echo '{{ file "hello" }}' | korvike
   Hello World
   ```
+- `{{ markdown <source> }}`  
+  Format the source using a markdown parser
+  ```console
+  $ echo '{{ markdown "# headline" | korvike }}'
+  <h1>headline</h1>
+  ```
 - `{{ now <format string> }}`  
   Format the current date into the template (uses [Go time format](https://golang.org/pkg/time/#Time.Format))
   ```console
