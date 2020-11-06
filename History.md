@@ -1,3 +1,7 @@
+# 0.8.1 / 2020-11-06
+
+  * Fix: Update go.sum file in main dir
+
 # 0.8.0 / 2020-11-06
 
   * Update blackfriday
