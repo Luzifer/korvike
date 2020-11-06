@@ -1,3 +1,7 @@
+# 0.8.0 / 2020-11-06
+
+  * Update blackfriday
+
 # 0.7.1 / 2020-04-08
 
   * Fix tests
