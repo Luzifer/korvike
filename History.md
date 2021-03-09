@@ -1,3 +1,7 @@
+# 0.8.2 / 2021-03-09
+
+  * Update dependencies
+
 # 0.8.1 / 2020-11-06
 
   * Fix: Update go.sum file in main dir
