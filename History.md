@@ -1,3 +1,7 @@
+# 0.9.0 / 2021-03-22
+
+  * Add support for executing sub-templates
+
 # 0.8.2 / 2021-03-09
 
   * Update dependencies
