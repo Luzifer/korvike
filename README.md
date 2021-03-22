@@ -47,6 +47,14 @@
   $ echo '{{ now "2006-01-02 15:04:05" }}' | korvike
   2017-04-17 16:27:34
   ```
+- `{{ tplexec (file "my.tpl") }}`  
+  Execute the given template with the same function set and variables as the parent template.
+  ```console
+  $ export FOO=bar
+  $ echo '{{ env "FOO" }}' >my.tpl
+  $ echo '{{ tplexec (file "my.tpl") }}' | korvike
+  bar
+  ```
 - `{{ vault <path> <key> [default value] }}`  
   Read a key from Vault using `VAULT_ADDR` and `VAULT_TOKEN` environment variables (or `~/.vault-token` file) for authentication.
   ```console

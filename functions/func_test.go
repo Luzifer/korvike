@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"math/rand"
 	"os"
+	"strings"
 	"testing"
 	"text/template"
 	"time"
@@ -16,6 +17,8 @@ func renderHelper(tpl string, ctx map[string]interface{}) string {
 	if err != nil {
 		panic(err)
 	}
+
+	SetSubTemplateVariables(ctx)
 
 	buf := bytes.NewBufferString("")
 	if err := t.Execute(buf, ctx); err != nil {
@@ -73,5 +76,17 @@ func Test_file(t *testing.T) {
 func Test_now(t *testing.T) {
 	if _, err := time.Parse(time.RFC3339Nano, renderHelper(fmt.Sprintf("{{now %q}}", time.RFC3339Nano), nil)); err != nil {
 		t.Errorf("[now] did not produce expected time format")
+	}
+}
+
+func Test_tplexec(t *testing.T) {
+	result := randomString()
+	os.Setenv("KORVIKE_TESTING", result)
+
+	if res := renderHelper(`{{ tplexec "{{ .var }}:{{ env \"KORVIKE_TESTING\" }}" }}`, map[string]interface{}{"var": "test"}); res != strings.Join([]string{
+		"test",
+		result,
+	}, ":") {
+		t.Errorf("[template] did not produce expected result %q != test", res)
 	}
 }

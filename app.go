@@ -77,7 +77,13 @@ func main() {
 		log.Fatalf("Unable to parse template: %s", err)
 	}
 
-	if err := tpl.Execute(out, env.ListToMap(cfg.KeyPairs)); err != nil {
+	vars := map[string]interface{}{}
+	for k, v := range env.ListToMap(cfg.KeyPairs) {
+		vars[k] = v
+	}
+
+	korvike.SetSubTemplateVariables(vars)
+	if err := tpl.Execute(out, vars); err != nil {
 		log.Fatalf("Unable to execute template: %s", err)
 	}
 }
