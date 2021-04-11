@@ -35,10 +35,16 @@
   $ echo '{{ file "hello" }}' | korvike
   Hello World
   ```
+- `{{ hash <algo> <string> }}`  
+  Hash string with given algorithm (supported algorithms: md5, sha1, sha256, sha512)
+  ```console
+  $ echo '{{ hash "sha256" "this is a test" }}' | korvike
+  2e99758548972a8e8822ad47fa1017ff72f06f3ff6a016851f45c398732bc50c
+  ```
 - `{{ markdown <source> }}`  
   Format the source using a markdown parser
   ```console
-  $ echo '{{ markdown "# headline" | korvike }}'
+  $ echo '{{ markdown "# headline" }}' | korvike
   <h1>headline</h1>
   ```
 - `{{ now <format string> }}`  

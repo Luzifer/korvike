@@ -73,6 +73,20 @@ func Test_file(t *testing.T) {
 	}
 }
 
+func Test_hash(t *testing.T) {
+	input := "I'm a string to hash"
+	for algo, exp := range map[string]string{
+		"md5":    "d5adddaa0fd9f924b85e7874dc85f814",
+		"sha1":   "bd41599338445f401b8d3751fbe718e8a0b52004",
+		"sha256": "ba32f090baf28862816a10da05509b31393704184ae49c68f9eb2933afa9e4d1",
+		"sha512": "3288edcff4f28526fe8ecfb6d5182f2a446ab0572550c9591d1f5cacd377397af25c0274c9c2428c35422d215ccdc304d0353c093c76e750f9d7c4d54e64eed8",
+	} {
+		if res := renderHelper(fmt.Sprintf("{{ hash %q %q }}", algo, input), nil); res != exp {
+			t.Errorf("Hash algo %q yield unexpected result: exp=%q res=%q", algo, exp, res)
+		}
+	}
+}
+
 func Test_now(t *testing.T) {
 	if _, err := time.Parse(time.RFC3339Nano, renderHelper(fmt.Sprintf("{{now %q}}", time.RFC3339Nano), nil)); err != nil {
 		t.Errorf("[now] did not produce expected time format")
