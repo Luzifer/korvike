@@ -1,3 +1,7 @@
+# 0.10.0 / 2021-04-11
+
+  * Add "hash" template function
+
 # 0.9.0 / 2021-03-22
 
   * Add support for executing sub-templates
