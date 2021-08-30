@@ -47,6 +47,21 @@ func Test_GetFunctionMap(t *testing.T) {
 	}
 }
 
+func Test_base64(t *testing.T) {
+	var (
+		b64   = "aGVsbG8="
+		plain = "hello"
+	)
+
+	if r := renderHelper(fmt.Sprintf(`{{b64decode "%s"}}`, b64), nil); r != plain {
+		t.Errorf("[b64decode] did not yield expected string: %q (expected %q)", r, plain)
+	}
+
+	if r := renderHelper(fmt.Sprintf(`{{b64encode "%s"}}`, plain), nil); r != b64 {
+		t.Errorf("[b64encode] did not yield expected string: %q (expected %q)", r, b64)
+	}
+}
+
 func Test_env(t *testing.T) {
 	result := randomString()
 	os.Setenv("KORVIKE_TESTING", result)

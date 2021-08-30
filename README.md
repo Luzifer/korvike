@@ -15,6 +15,12 @@
   $ echo "{{ .foo }}" | korvike -v foo=bar
   bar
   ```
+- `{{ b64decode <string> }}`  
+  Decodes the string with base64 [StdEncoding](https://golang.org/pkg/encoding/base64/#pkg-variables)
+  ```console
+  $ echo '{{ b64decode "SGVsbG8gV29ybGQ=" }}' | korvike
+  Hello World
+  ```
 - `{{ b64encode <string> }}`  
   Encodes the string with base64 [StdEncoding](https://golang.org/pkg/encoding/base64/#pkg-variables)
   ```console
