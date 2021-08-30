@@ -1,3 +1,7 @@
+# 0.11.0 / 2021-08-30
+
+  * Add support for b64decode
+
 # 0.10.0 / 2021-04-11
 
   * Add "hash" template function
