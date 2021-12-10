@@ -67,6 +67,12 @@
   $ echo '{{ tplexec (file "my.tpl") }}' | korvike
   bar
   ```
+- `{{ urlescape <input string> }}`  
+  Do an URL escape to use the input string inside an query parameter in an URL
+  ```console
+  $ echo '{{ urlescape "Hellö Wörld@Golang" }}' | korvike 
+  Hell%C3%B6+W%C3%B6rld%40Golang
+  ```
 - `{{ vault <path> <key> [default value] }}`  
   Read a key from Vault using `VAULT_ADDR` and `VAULT_TOKEN` environment variables (or `~/.vault-token` file) for authentication.
   ```console
