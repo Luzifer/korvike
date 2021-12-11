@@ -1,3 +1,7 @@
+# 0.12.0 / 2021-12-11
+
+  * Add urlescape function
+
 # 0.11.0 / 2021-08-30
 
   * Add support for b64decode
