@@ -47,6 +47,12 @@
   $ echo '{{ hash "sha256" "this is a test" }}' | korvike
   2e99758548972a8e8822ad47fa1017ff72f06f3ff6a016851f45c398732bc50c
   ```
+- `{{ join <string> <delim> }}`  
+  Joins the given slice of strings with given delimiter.
+  ```console
+  $ echo '{{ join (split "a,b,c" ",") "|" }}' | korvike
+  a|b|c
+  ```
 - `{{ markdown <source> }}`  
   Format the source using a markdown parser
   ```console
@@ -58,6 +64,12 @@
   ```console
   $ echo '{{ now "2006-01-02 15:04:05" }}' | korvike
   2017-04-17 16:27:34
+  ```
+- `{{ split <string> <sep> }}`  
+  Splits the given string by given separator.
+  ```console
+  $ echo '{{ range (split "a,b,c" ",") }}{{ . }} {{ end }}' | korvike
+  a b c
   ```
 - `{{ tplexec (file "my.tpl") }}`  
   Execute the given template with the same function set and variables as the parent template.
