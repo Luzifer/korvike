@@ -1,3 +1,8 @@
+# 0.13.0 / 2022-03-30
+
+  * Add basic string manipulation `join` and `split`
+  * Upgrade dependencies, update mod-files
+
 # 0.12.0 / 2021-12-11
 
   * Add urlescape function
