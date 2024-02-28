@@ -8,6 +8,7 @@ import (
 
 var subTemplateVariables map[string]interface{}
 
+// SetSubTemplateVariables sets variables to apply in `tplexec` function
 func SetSubTemplateVariables(m map[string]interface{}) { subTemplateVariables = m }
 
 func init() {

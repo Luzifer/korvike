@@ -1,7 +1,6 @@
 package functions
 
 import (
-	"io/ioutil"
 	"os"
 )
 
@@ -12,7 +11,8 @@ func init() {
 			defaultValue = v[0]
 		}
 		if _, err := os.Stat(name); err == nil {
-			if rawValue, err := ioutil.ReadFile(name); err == nil {
+			//#nosec:G304 // Intended to load custom file
+			if rawValue, err := os.ReadFile(name); err == nil {
 				return string(rawValue)
 			}
 		}

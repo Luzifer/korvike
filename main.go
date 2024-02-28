@@ -1,10 +1,8 @@
 package main
 
 import (
-	"errors"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"log"
 	"os"
 	"text/template"
@@ -25,15 +23,12 @@ var (
 	version = "dev"
 )
 
-func init() {
+func initApp() (err error) {
 	if err := rconfig.Parse(&cfg); err != nil {
-		log.Fatalf("Unable to parse commandline options: %s", err)
+		return fmt.Errorf("parsing CLI options: %w", err)
 	}
 
-	if cfg.VersionAndExit {
-		fmt.Printf("korvike %s\n", version)
-		os.Exit(0)
-	}
+	return nil
 }
 
 func openInput(f string) (io.Reader, error) {
@@ -42,10 +37,15 @@ func openInput(f string) (io.Reader, error) {
 	}
 
 	if _, err := os.Stat(f); err != nil {
-		return nil, errors.New("Could not find file " + f)
+		return nil, fmt.Errorf("finding file  %q: %s", f, err)
 	}
 
-	return os.Open(f)
+	r, err := os.Open(f) //#nosec G304 // Intended to use user-given file
+	if err != nil {
+		return nil, fmt.Errorf("opening file: %w", err)
+	}
+
+	return r, nil
 }
 
 func openOutput(f string) (io.Writer, error) {
@@ -53,28 +53,43 @@ func openOutput(f string) (io.Writer, error) {
 		return os.Stdout, nil
 	}
 
-	return os.Create(f)
+	w, err := os.Create(f) //#nosec G304 // Intended to use user-given file
+	if err != nil {
+		return nil, fmt.Errorf("creating file: %w", err)
+	}
+
+	return w, nil
 }
 
 func main() {
+	var err error
+	if err = initApp(); err != nil {
+		log.Fatalf("initializing app: %s", err)
+	}
+
+	if cfg.VersionAndExit {
+		fmt.Printf("korvike %s\n", version) //nolint:forbidigo
+		os.Exit(0)
+	}
+
 	in, err := openInput(cfg.Input)
 	if err != nil {
-		log.Fatalf("Unable to open input: %s", err)
+		log.Fatalf("opening input: %s", err)
 	}
 
 	out, err := openOutput(cfg.Output)
 	if err != nil {
-		log.Fatalf("Unable to open output: %s", err)
+		log.Fatalf("opening output: %s", err)
 	}
 
-	rawTpl, err := ioutil.ReadAll(in)
+	rawTpl, err := io.ReadAll(in)
 	if err != nil {
-		log.Fatalf("Unable to read from input: %s", err)
+		log.Fatalf("reading from input: %s", err)
 	}
 
 	tpl, err := template.New("in").Funcs(korvike.GetFunctionMap()).Parse(string(rawTpl))
 	if err != nil {
-		log.Fatalf("Unable to parse template: %s", err)
+		log.Fatalf("parsing template: %s", err)
 	}
 
 	vars := map[string]interface{}{}
@@ -84,6 +99,6 @@ func main() {
 
 	korvike.SetSubTemplateVariables(vars)
 	if err := tpl.Execute(out, vars); err != nil {
-		log.Fatalf("Unable to execute template: %s", err)
+		log.Fatalf("executing template: %s", err)
 	}
 }

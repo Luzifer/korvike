@@ -3,7 +3,6 @@ package functions
 import (
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"os"
 
 	"github.com/hashicorp/vault/api"
@@ -13,10 +12,10 @@ import (
 func init() {
 	registerFunction("vault", func(name string, v ...string) (interface{}, error) {
 		if name == "" {
-			return nil, fmt.Errorf("Path is not set")
+			return nil, fmt.Errorf("path is not set")
 		}
 		if len(v) < 1 {
-			return nil, fmt.Errorf("Key is not set")
+			return nil, fmt.Errorf("key is not set")
 		}
 
 		client, err := vaultClientFromEnvOrFile()
@@ -26,7 +25,7 @@ func init() {
 
 		secret, err := client.Logical().Read(name)
 		if err != nil {
-			return nil, err
+			return nil, fmt.Errorf("reading secret: %s", err)
 		}
 
 		if secret != nil && secret.Data != nil {
@@ -35,8 +34,8 @@ func init() {
 			}
 		}
 
-		if len(v) < 2 {
-			return nil, fmt.Errorf("Requested value %q in key %q was not found in Vault and no default was set", v[0], name)
+		if len(v) < 2 { //nolint:gomnd
+			return nil, fmt.Errorf("requested value %q in key %q was not found in Vault and no default was set", v[0], name)
 		}
 
 		return v[1], nil
@@ -48,29 +47,28 @@ func vaultClientFromEnvOrFile() (*api.Client, error) {
 		Address: os.Getenv(api.EnvVaultAddress),
 	})
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("creating Vault client: %w", err)
 	}
 
 	switch {
-
 	case os.Getenv(api.EnvVaultToken) != "":
 		client.SetToken(os.Getenv(api.EnvVaultToken))
 
 	case os.Getenv("VAULT_ROLE_ID") != "":
 		if err = setVaultTokenFromRoleID(client); err != nil {
-			return nil, fmt.Errorf("Unable to fetch VAULT_TOKEN: %s", err)
+			return nil, fmt.Errorf("fetch VAULT_TOKEN: %w", err)
 		}
 
 	case hasTokenFile():
 		if f, err := homedir.Expand("~/.vault-token"); err == nil {
-			if b, err := ioutil.ReadFile(f); err == nil {
+			//#nosec:G304 // File is a well-known file location
+			if b, err := os.ReadFile(f); err == nil {
 				client.SetToken(string(b))
 			}
 		}
 
 	default:
-		return nil, errors.New("Neither VAULT_TOKEN nor VAULT_ROLE_ID was found in ENV and no ~/.vault-token file is present")
-
+		return nil, errors.New("neither VAULT_TOKEN nor VAULT_ROLE_ID was found in ENV and no ~/.vault-token file is present")
 	}
 
 	return client, nil
@@ -97,7 +95,7 @@ func setVaultTokenFromRoleID(client *api.Client) error {
 
 	loginSecret, lserr := client.Logical().Write("auth/approle/login", data)
 	if lserr != nil || loginSecret.Auth == nil {
-		return fmt.Errorf("Unable to fetch authentication token: %s", lserr)
+		return fmt.Errorf("fetching authentication token: %w", lserr)
 	}
 
 	client.SetToken(loginSecret.Auth.ClientToken)
