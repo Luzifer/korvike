@@ -1,3 +1,19 @@
+# 1.0.0 / 2024-02-29
+
+  * Breaking: Add sprig functions, replace some internal ones
+  * Replace old build-system
+
+**Breaking changes:**
+
+- Function `env` no longer takes a default, use `env "MYVAR" | default "..."`
+- Function `file` no longer takes a default, use `file "[filename]" | default "..."`
+- Function `now` returns `time.Time`, use `now | date "[format]"`
+- Function `split` now has reversed parameters `split <sep> <str>`
+- Function `vault` no longet takes a default, use `vault "key" "field" | default "..."`
+- Removed function `b64decode`, use `b64dec`
+- Removed function `b64encode`, use `b64enc`
+- Removed function `hash`, use `sha1sum` / `sha256sum` / `sha512sum`
+
 # 0.13.0 / 2022-03-30
 
   * Add basic string manipulation `join` and `split`

@@ -4,7 +4,7 @@
 
 # Luzifer / korvike
 
-`korvike` is the finnish translation to the word "replacer" and that is what it does: It takes a Go template and executes it.
+`korvike` is the Finnish translation to the word "replacer" and that is what it does: It takes a Go template and executes it.
 
 ## Available functions
 
