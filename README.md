@@ -16,8 +16,8 @@ Starting with `v1.0.0` Korvike is based on the [sprig functions collection](http
   $ echo "{{ .foo }}" | korvike -v foo=bar
   bar
   ```
-- `{{ file <file name> [default value] }}`  
-  Read a file and place it inside the template
+- `{{ file <file name> }}` / `{{ mustFile <file name> }}`  
+  Read a file and place it inside the template, `file` returns an empty string on error, `mustFile` an error
   ```console
   $ echo "Hello World" > hello
   $ echo '{{ file "hello" }}' | korvike
@@ -43,8 +43,8 @@ Starting with `v1.0.0` Korvike is based on the [sprig functions collection](http
   $ echo '{{ urlescape "Hellö Wörld@Golang" }}' | korvike 
   Hell%C3%B6+W%C3%B6rld%40Golang
   ```
-- `{{ vault <path> <key> [default value] }}`  
-  Read a key from Vault using `VAULT_ADDR` and `VAULT_TOKEN` environment variables (or `~/.vault-token` file) for authentication.
+- `{{ vault <path> <key> }}` / `{{ mustVault <path> <key> }}`  
+  Read a key from Vault using `VAULT_ADDR` and `VAULT_TOKEN` environment variables (or `~/.vault-token` file) for authentication. `vault` returns an empty string on error, `mustVault` an error
   ```console
   $ vault write secret/test foo=bar
   $ echo '{{ vault "secret/test" "foo" }}' | korvike

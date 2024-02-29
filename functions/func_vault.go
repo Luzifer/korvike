@@ -10,36 +10,42 @@ import (
 )
 
 func init() {
-	registerFunction("vault", func(name string, v ...string) (interface{}, error) {
-		if name == "" {
-			return nil, fmt.Errorf("path is not set")
-		}
-		if len(v) < 1 {
-			return nil, fmt.Errorf("key is not set")
-		}
+	registerFunction("mustVault", tplVaultKeyFetch)
 
-		client, err := vaultClientFromEnvOrFile()
+	registerFunction("vault", func(name string, key string) string {
+		v, err := tplVaultKeyFetch(name, key)
 		if err != nil {
-			return nil, err
+			return ""
 		}
-
-		secret, err := client.Logical().Read(name)
-		if err != nil {
-			return nil, fmt.Errorf("reading secret: %s", err)
-		}
-
-		if secret != nil && secret.Data != nil {
-			if val, ok := secret.Data[v[0]]; ok {
-				return val, nil
-			}
-		}
-
-		if len(v) < 2 { //nolint:gomnd
-			return nil, fmt.Errorf("requested value %q in key %q was not found in Vault and no default was set", v[0], name)
-		}
-
-		return v[1], nil
+		return v
 	})
+}
+
+func tplVaultKeyFetch(name string, key string) (string, error) {
+	if name == "" {
+		return "", fmt.Errorf("path is not set")
+	}
+	if key == "" {
+		return "", fmt.Errorf("key is not set")
+	}
+
+	client, err := vaultClientFromEnvOrFile()
+	if err != nil {
+		return "", err
+	}
+
+	secret, err := client.Logical().Read(name)
+	if err != nil {
+		return "", fmt.Errorf("reading secret: %s", err)
+	}
+
+	if secret != nil && secret.Data != nil {
+		if val, ok := secret.Data[key].(string); ok {
+			return val, nil
+		}
+	}
+
+	return "", fmt.Errorf("requested value %q in key %q was not found in Vault and no default was set", key, name)
 }
 
 func vaultClientFromEnvOrFile() (*api.Client, error) {
