@@ -1,3 +1,7 @@
+# 1.0.1 / 2024-03-08
+
+  * Update dependencies
+
 # 1.0.0 / 2024-02-29
 
   * Breaking: Add sprig functions, replace some internal ones
