@@ -7,7 +7,7 @@ import (
 	"os"
 	"text/template"
 
-	"github.com/Luzifer/go_helpers/v2/env"
+	"github.com/Luzifer/go_helpers/env"
 	korvike "github.com/Luzifer/korvike/functions"
 	"github.com/Luzifer/rconfig/v2"
 )
