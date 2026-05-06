@@ -1,3 +1,8 @@
+# 1.0.5 / 2026-05-06
+
+  * chore: resolve linter errors
+  * fix: update dependencies
+
 # 1.0.4 / 2025-01-28
 
   * Update go dependencies
