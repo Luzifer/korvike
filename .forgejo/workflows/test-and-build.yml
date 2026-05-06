@@ -1,9 +1,7 @@
 name: test-and-build
 
 on:
-  push:
-    branches: ['*']
-    tags: ['v*']
+  push: {}
 
 permissions:
   contents: write
