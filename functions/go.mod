@@ -7,7 +7,7 @@ require (
 	github.com/hashicorp/vault/api v1.23.0
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/russross/blackfriday/v2 v2.1.0
-	github.com/stretchr/testify v1.10.0
+	github.com/stretchr/testify v1.11.1
 )
 
 require (
