@@ -14,7 +14,9 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func renderHelper(t *testing.T, rawTpl string, ctx map[string]interface{}) string {
+func renderHelper(t *testing.T, rawTpl string, ctx map[string]any) string {
+	t.Helper()
+
 	tpl, err := template.New("mytemplate").Funcs(GetFunctionMap()).Parse(rawTpl)
 	require.NoError(t, err)
 
@@ -56,18 +58,18 @@ func Test_base64(t *testing.T) {
 
 func Test_env(t *testing.T) {
 	result := randomString()
-	require.NoError(t, os.Setenv("KORVIKE_TESTING", result))
+	t.Setenv("KORVIKE_TESTING", result)
 
 	assert.Equal(t, result, renderHelper(t, `{{ env "KORVIKE_TESTING" }}`, nil))
 }
 
 func Test_file(t *testing.T) {
-	f, err := os.CreateTemp("", "")
+	f, err := os.CreateTemp(t.TempDir(), "")
 	require.NoError(t, err)
 
 	p := f.Name()
 	result := randomString()
-	fmt.Fprint(f, result)
+	_, _ = fmt.Fprint(f, result)
 	require.NoError(t, f.Close())
 
 	t.Cleanup(func() {
@@ -98,7 +100,7 @@ func Test_now(t *testing.T) {
 
 func Test_tplexec(t *testing.T) {
 	result := randomString()
-	require.NoError(t, os.Setenv("KORVIKE_TESTING", result))
+	t.Setenv("KORVIKE_TESTING", result)
 
 	assert.Equal(
 		t,

@@ -91,7 +91,7 @@ func hasTokenFile() bool {
 }
 
 func setVaultTokenFromRoleID(client *api.Client) error {
-	data := map[string]interface{}{
+	data := map[string]any{
 		"role_id": os.Getenv("VAULT_ROLE_ID"),
 	}
 

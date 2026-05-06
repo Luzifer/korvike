@@ -6,10 +6,10 @@ import (
 	"text/template"
 )
 
-var subTemplateVariables map[string]interface{}
+var subTemplateVariables map[string]any
 
 // SetSubTemplateVariables sets variables to apply in `tplexec` function
-func SetSubTemplateVariables(m map[string]interface{}) { subTemplateVariables = m }
+func SetSubTemplateVariables(m map[string]any) { subTemplateVariables = m }
 
 func init() {
 	registerFunction("tplexec", func(rawTpl string) (string, error) {

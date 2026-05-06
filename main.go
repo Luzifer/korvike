@@ -1,3 +1,4 @@
+// Korvike Utility
 package main
 
 import (
@@ -8,8 +9,9 @@ import (
 	"text/template"
 
 	"github.com/Luzifer/go_helpers/env"
-	korvike "github.com/Luzifer/korvike/functions"
 	"github.com/Luzifer/rconfig/v2"
+
+	korvike "github.com/Luzifer/korvike/functions"
 )
 
 var (
@@ -40,7 +42,7 @@ func openInput(f string) (io.Reader, error) {
 		return nil, fmt.Errorf("finding file  %q: %s", f, err)
 	}
 
-	r, err := os.Open(f) //#nosec G304 // Intended to use user-given file
+	r, err := os.Open(f) //#nosec:G304 // Intended to use user-given file
 	if err != nil {
 		return nil, fmt.Errorf("opening file: %w", err)
 	}
@@ -53,7 +55,7 @@ func openOutput(f string) (io.Writer, error) {
 		return os.Stdout, nil
 	}
 
-	w, err := os.Create(f) //#nosec G304 // Intended to use user-given file
+	w, err := os.Create(f) //#nosec:G304 // Intended to use user-given file
 	if err != nil {
 		return nil, fmt.Errorf("creating file: %w", err)
 	}
@@ -68,7 +70,7 @@ func main() {
 	}
 
 	if cfg.VersionAndExit {
-		fmt.Printf("korvike %s\n", version) //nolint:forbidigo
+		fmt.Printf("korvike %s\n", version) //nolint:forbidigo // printing version to stdout is fine
 		os.Exit(0)
 	}
 
@@ -92,7 +94,7 @@ func main() {
 		log.Fatalf("parsing template: %s", err)
 	}
 
-	vars := map[string]interface{}{}
+	vars := make(map[string]any)
 	for k, v := range env.ListToMap(cfg.KeyPairs) {
 		vars[k] = v
 	}

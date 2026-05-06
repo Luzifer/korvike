@@ -15,7 +15,7 @@ var (
 	templateFunctionsLock sync.Mutex
 )
 
-func registerFunction(name string, f interface{}) {
+func registerFunction(name string, f any) {
 	templateFunctionsLock.Lock()
 	defer templateFunctionsLock.Unlock()
 
