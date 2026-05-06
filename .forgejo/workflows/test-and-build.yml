@@ -35,5 +35,4 @@ jobs:
 
       - name: Do a quick local compile
         run: |
-          make frontend
           go build .
