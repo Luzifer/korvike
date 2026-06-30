@@ -1,3 +1,7 @@
+# 1.2.0 / 2026-06-30
+
+  * feat: add `fromYaml` and `toYaml` functions
+
 # 1.1.0 / 2026-06-30
 
   * feat: add safe template function mode
