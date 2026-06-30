@@ -1,3 +1,8 @@
+# 1.1.0 / 2026-06-30
+
+  * feat: add safe template function mode
+  * fix(security): force upgrade golang.org/x/... modules
+
 # 1.0.5 / 2026-05-06
 
   * chore: resolve linter errors
