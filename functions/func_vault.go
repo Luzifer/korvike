@@ -10,7 +10,7 @@ import (
 )
 
 func init() {
-	registerFunction("mustVault", tplVaultKeyFetch)
+	registerFunction("mustVault", tplVaultKeyFetch, false)
 
 	registerFunction("vault", func(name string, key string) string {
 		v, err := tplVaultKeyFetch(name, key)
@@ -18,7 +18,7 @@ func init() {
 			return ""
 		}
 		return v
-	})
+	}, false)
 }
 
 func tplVaultKeyFetch(name string, key string) (string, error) {

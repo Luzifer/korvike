@@ -24,5 +24,5 @@ func init() {
 		}
 
 		return out.String(), nil
-	})
+	}, false)
 }

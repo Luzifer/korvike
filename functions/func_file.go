@@ -12,9 +12,9 @@ func init() {
 			return ""
 		}
 		return fc
-	})
+	}, false)
 
-	registerFunction("mustFile", tplReadFile)
+	registerFunction("mustFile", tplReadFile, false)
 }
 
 func tplReadFile(name string) (string, error) {

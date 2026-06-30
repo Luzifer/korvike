@@ -19,6 +19,7 @@ var (
 		Input          string   `flag:"in,i" default:"-" description:"Source to read the template from ('-' = stdin)"`
 		KeyPairs       []string `flag:"key-value,v" default:"" description:"Key-value pairs to use in templating (-v key=value)"`
 		Output         string   `flag:"out,o" default:"-" description:"Destination to write the output to ('-' = stdout)"`
+		Safe           bool     `flag:"safe" default:"false" description:"Only load safe functions (for untrusted templates)"`
 		VersionAndExit bool     `flag:"version" default:"false" description:"Prints current version and exits"`
 	}{}
 
@@ -89,7 +90,14 @@ func main() {
 		log.Fatalf("reading from input: %s", err)
 	}
 
-	tpl, err := template.New("in").Funcs(korvike.GetFunctionMap()).Parse(string(rawTpl))
+	funcLoader := korvike.WithAll
+	if cfg.Safe {
+		funcLoader = korvike.WithSafe
+	}
+
+	tpl, err := template.New("in").Funcs(korvike.GetFunctionMap(
+		funcLoader,
+	)).Parse(string(rawTpl))
 	if err != nil {
 		log.Fatalf("parsing template: %s", err)
 	}
