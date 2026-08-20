@@ -1,3 +1,9 @@
+# 1.2.1 / 2026-08-20
+
+  * fix: use proper indent of 2 spaces
+  * fix(deps): update module github.com/stretchr/testify to v1.12.0 (#10)
+  * chore(sec): force-upgrade transitive dependencies
+
 # 1.2.0 / 2026-06-30
 
   * feat: add `fromYaml` and `toYaml` functions
