@@ -1,3 +1,10 @@
+# 1.2.2 / 2026-09-17
+
+  * fix(sec): update transitive dependencies
+  * fix(deps): update module github.com/luzifer/go_helpers/env to v0.5.4 (#12)
+  * fix(deps): update module github.com/luzifer/korvike/functions to v1.2.1 (#13)
+  * fix(deps): update module github.com/stretchr/testify to v1.12.1 (#11)
+
 # 1.2.1 / 2026-08-20
 
   * fix: use proper indent of 2 spaces
