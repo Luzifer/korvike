@@ -3,29 +3,20 @@ name: test-and-build
 on:
   push: {}
 
-permissions:
-  contents: write
-  issues: write
-
 jobs:
   test-and-build:
     defaults:
       run:
         shell: bash
 
-    container:
-      image: ghcr.io/luzifer-docker/action-env:2026.37.0@sha256:0761a59a47232579d833dcdf7878a2e49be4a84e26b45d6e1a24acc0424b8774
-      env:
-        CGO_ENABLED: 0
-        GOPATH: /go
+    env:
+      CGO_ENABLED: 0
+      GOPATH: /go
 
     runs-on: forgejo
 
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-
-      - name: Marking workdir safe
-        run: git config --global --add safe.directory /__w/korvike/korvike
 
       - name: 'Lint and test code'
         run: |
