@@ -5,7 +5,7 @@ go 1.26.0
 replace github.com/Luzifer/korvike/functions => ./functions
 
 require (
-	github.com/Luzifer/go_helpers/env v0.5.2
+	github.com/Luzifer/go_helpers/env v0.5.4
 	github.com/Luzifer/korvike/functions v1.2.0
 	github.com/Luzifer/rconfig/v2 v2.6.2
 )
