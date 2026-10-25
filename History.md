@@ -1,3 +1,7 @@
+# 1.2.3 / 2026-10-25
+
+  * chore(deps): update module golang.org/x/net to v0.61.0 [security] (#14)
+
 # 1.2.2 / 2026-09-17
 
   * fix(sec): update transitive dependencies
