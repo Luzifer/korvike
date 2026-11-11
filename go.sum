@@ -4,6 +4,8 @@ github.com/BurntSushi/toml v0.3.1 h1:WXkYYl6Yr3qBf1K79EBnL4mak0OimBfB0XUf9Vl28OQ
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/Luzifer/go_helpers/env v0.5.4 h1:m+ulGq2IR4BerGf0sbXZyZQXHZealKX75X5yfJXdYdY=
 github.com/Luzifer/go_helpers/env v0.5.4/go.mod h1:h8+r3gXYaTeiyIIitZvr/Iwo+Q96CH2z12PnEgkbd80=
+github.com/Luzifer/korvike/functions v1.2.3 h1:Oj42rCS82Fm2hpoMv/6D8YjZW8ZS3T1F+/bje7QiDGQ=
+github.com/Luzifer/korvike/functions v1.2.3/go.mod h1:S0ZfsORC7W5zS0djtxh0v/u2u4qjbOXbKX5tUHtSNq0=
 github.com/Luzifer/rconfig/v2 v2.6.3 h1:a3/uiCENbF1EllPzLa9Fav4KeKvwJjWeSHjGwHtwYWk=
 github.com/Luzifer/rconfig/v2 v2.6.3/go.mod h1:56nLhDKm1ubJ2N24mF7USmhW+jCP2sqGrnEBbM8G+BQ=
 github.com/Masterminds/goutils v1.1.1 h1:5nUrii3FMTL5diU80unEVvNevw1nH4+ZV4DSLVJLSYI=

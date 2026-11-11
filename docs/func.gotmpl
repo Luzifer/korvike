@@ -1,0 +1,14 @@
+- `{{ .Title }}`\
+  {{ .Description }}
+  ```console
+  {{- range .PreCommands }}
+  $ {{ . }}
+  {{- end }}
+  {{- range $key, $value := .Environ }}
+  $ export '{{ $key }}={{ $value }}'
+  {{- end }}
+  $ korvike {{- range $key, $value := .Vars}} -v '{{ $key }}={{ $value }}'{{ end }} <<-EOF
+  {{ .Template }}
+  EOF
+  {{ .Output }}
+  ```
