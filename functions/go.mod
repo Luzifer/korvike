@@ -4,6 +4,7 @@ go 1.26.0
 
 require (
 	github.com/Masterminds/sprig/v3 v3.3.0
+	github.com/adrg/frontmatter v0.2.0
 	github.com/hashicorp/vault/api v1.23.0
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/russross/blackfriday/v2 v2.1.0
@@ -13,6 +14,7 @@ require (
 
 require (
 	dario.cat/mergo v1.0.2 // indirect
+	github.com/BurntSushi/toml v0.3.1 // indirect
 	github.com/Masterminds/goutils v1.1.1 // indirect
 	github.com/Masterminds/semver/v3 v3.5.0 // indirect
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
@@ -39,4 +41,5 @@ require (
 	golang.org/x/net v0.62.0 // indirect
 	golang.org/x/text v0.44.0 // indirect
 	golang.org/x/time v0.16.0 // indirect
+	gopkg.in/yaml.v2 v2.3.0 // indirect
 )
