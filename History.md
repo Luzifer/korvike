@@ -1,3 +1,16 @@
+# 1.3.0 / 2026-11-12
+
+* New Features
+  * feat: add `extractMarkdownFrontmatter` and `extractMarkdownContent`
+
+* Bugfixes
+  * chore(deps): update module github.com/go-jose/go-jose/v4 to v4.1.6 [security] (#16)
+  * chore(deps): update module golang.org/x/crypto to v0.59.0 [security] (#20)
+  * chore(deps): update module golang.org/x/net to v0.62.0 [security] (#17)
+  * chore(deps): update module golang.org/x/sys to v0.50.0 [security] (#21)
+  * fix(deps): update module github.com/luzifer/rconfig/v2 to v2.6.3 (#19)
+  * fix(deps): update module go.yaml.in/yaml/v3 to v3.0.6 (#18)
+
 # 1.2.3 / 2026-10-25
 
   * chore(deps): update module golang.org/x/net to v0.61.0 [security] (#14)
