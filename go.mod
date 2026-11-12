@@ -4,7 +4,7 @@ go 1.26.0
 
 require (
 	github.com/Luzifer/go_helpers/env v0.5.4
-	github.com/Luzifer/korvike/functions v1.3.0
+	github.com/Luzifer/korvike/functions v1.3.1
 	github.com/Luzifer/rconfig/v2 v2.6.3
 )
 
@@ -37,7 +37,7 @@ require (
 	github.com/shopspring/decimal v1.4.0 // indirect
 	github.com/spf13/cast v1.10.0 // indirect
 	github.com/spf13/pflag v1.0.10 // indirect
-	github.com/yuin/goldmark v1.8.7 // indirect
+	github.com/yuin/goldmark/v2 v2.1.16 // indirect
 	go.yaml.in/yaml/v3 v3.0.6 // indirect
 	golang.org/x/crypto v0.59.0 // indirect
 	golang.org/x/net v0.62.0 // indirect
