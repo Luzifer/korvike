@@ -4,8 +4,10 @@
 
 # Luzifer / korvike
 
-`korvike` is the Finnish translation to the word "replacer" and that
-is what it does: It takes a Go template and executes it.
+`korvike` is Finnish for "substitute." It is a command-line tool for
+rendering Go templates from files or standard input. Values can be supplied
+through command-line flags, while Sprig and Korvike-specific functions
+provide common transformations and integrations.
 
 ## Getting started
 
@@ -42,7 +44,11 @@ Starting with `v1.0.0` Korvike is based on the
 [sprig functions collection](https://masterminds.github.io/sprig/)
 with some additions:
 
-- `{{ .<variable name> }}`\
+> [!NOTE]
+> Entries marked with 🔒 are available in `--safe` mode.
+> Entries marked as **Deprecated** will be removed in a later release.
+
+- `{{ .<variable name> }}` 🔒\
   Take key-value pairs from the CLI and replace them inside the template
   ```console
   $ korvike -v 'foo=bar' <<-EOF
@@ -50,7 +56,7 @@ with some additions:
   EOF
   bar
   ```
-- `{{ extractMarkdownContent <source> }}`\
+- `{{ extractMarkdownContent <source> }}` 🔒\
   Return the Markdown body without frontmatter. Missing frontmatter is valid and returns the original Markdown. Invalid frontmatter returns an error.
   ```console
   $ echo -e '---\ntitle: Example\n---\n# Heading' > page.md
@@ -59,7 +65,7 @@ with some additions:
   EOF
   # Heading
   ```
-- `{{ extractMarkdownFrontmatter <source> }}`\
+- `{{ extractMarkdownFrontmatter <source> }}` 🔒\
   Extract frontmatter as a map. Missing frontmatter is valid and returns an empty map. Invalid frontmatter returns an error.
   ```console
   $ echo -e '---\ntitle: Example\n---\n# Heading' > page.md
@@ -77,7 +83,7 @@ with some additions:
   EOF
   Hello World
   ```
-- `{{ fromYaml <source> }}`\
+- `{{ fromYaml <source> }}` 🔒\
   Parse YAML into a template value.
   ```console
   $ korvike <<-EOF
@@ -85,7 +91,7 @@ with some additions:
   EOF
   42
   ```
-- `{{ markdown <source> }}`\
+- `{{ markdown <source> }}` 🔒\
   Format the source using a Markdown parser.
   ```console
   $ korvike <<-EOF
@@ -93,7 +99,7 @@ with some additions:
   EOF
   <h1>headline</h1>
   ```
-- `{{ mustFile <file name> }}`\
+- `{{ mustFile <file name> }}` **(Deprecated)**\
   Read a file and place it inside the template. Returns an error when the file cannot be read.
   ```console
   $ echo "Hello World" > hello
@@ -102,7 +108,7 @@ with some additions:
   EOF
   Hello World
   ```
-- `{{ mustVault <path> <key> }}`\
+- `{{ mustVault <path> <key> }}` **(Deprecated)**\
   Read a key from Vault at `VAULT_ADDR`. Authenticate with `VAULT_TOKEN`, `VAULT_ROLE_ID` with optional `VAULT_SECRET_ID`, or a `~/.vault-token` file. Returns an error when the value cannot be read.
   ```console
   $ vault write secret/test foo=bar
@@ -111,7 +117,7 @@ with some additions:
   EOF
   bar
   ```
-- `{{ toYaml <value> }}`\
+- `{{ toYaml <value> }}` 🔒\
   Serialize a value as YAML with two-space indentation.
   ```console
   $ korvike <<-EOF
@@ -129,7 +135,7 @@ with some additions:
   EOF
   bar
   ```
-- `{{ urlescape <input string> }}`\
+- `{{ urlescape <input string> }}` 🔒\
   Escape input for use inside a URL query parameter.
   ```console
   $ korvike <<-EOF

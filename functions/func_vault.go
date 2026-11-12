@@ -11,6 +11,7 @@ import (
 
 var (
 	docMustVault = FunctionDocumentation{
+		Deprecated:  true,
 		Title:       `{{ mustVault <path> <key> }}`,
 		Description: "Read a key from Vault at `VAULT_ADDR`. Authenticate with `VAULT_TOKEN`, `VAULT_ROLE_ID` with optional `VAULT_SECRET_ID`, or a `~/.vault-token` file. Returns an error when the value cannot be read.",
 		Template:    `{{ mustVault "secret/test" "foo" }}`,

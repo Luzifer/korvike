@@ -16,6 +16,7 @@ var (
 	}
 
 	docMustFile = FunctionDocumentation{
+		Deprecated:  true,
 		Title:       `{{ mustFile <file name> }}`,
 		Description: "Read a file and place it inside the template. Returns an error when the file cannot be read.",
 		Template:    `{{ mustFile "hello" }}`,

@@ -4,8 +4,10 @@
 
 # Luzifer / korvike
 
-`korvike` is the Finnish translation to the word "replacer" and that
-is what it does: It takes a Go template and executes it.
+`korvike` is Finnish for "substitute." It is a command-line tool for
+rendering Go templates from files or standard input. Values can be supplied
+through command-line flags, while Sprig and Korvike-specific functions
+provide common transformations and integrations.
 
 ## Getting started
 
@@ -41,3 +43,7 @@ nested templates (`tplexec`) are unavailable in this mode.
 Starting with `v1.0.0` Korvike is based on the
 [sprig functions collection](https://masterminds.github.io/sprig/)
 with some additions:
+
+> [!NOTE]
+> Entries marked with 🔒 are available in `--safe` mode.
+> Entries marked as **Deprecated** will be removed in a later release.

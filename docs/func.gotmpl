@@ -1,4 +1,4 @@
-- `{{ .Title }}`\
+- `{{ .Title }}` {{- if .Safe }} 🔒{{ end }} {{- if .Deprecated}} **(Deprecated)**{{ end }}\
   {{ .Description }}
   ```console
   {{- range .PreCommands }}
