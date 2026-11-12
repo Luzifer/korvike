@@ -8,7 +8,7 @@ require (
 	github.com/hashicorp/vault/api v1.23.0
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/stretchr/testify v1.12.1
-	github.com/yuin/goldmark v1.8.7
+	github.com/yuin/goldmark/v2 v2.1.16
 	go.yaml.in/yaml/v3 v3.0.6
 )
 

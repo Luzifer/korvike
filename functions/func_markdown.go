@@ -6,9 +6,9 @@ import (
 	"strings"
 
 	"github.com/adrg/frontmatter"
-	"github.com/yuin/goldmark"
-	"github.com/yuin/goldmark/extension"
-	"github.com/yuin/goldmark/renderer/html"
+	"github.com/yuin/goldmark/v2/extension"
+	"github.com/yuin/goldmark/v2/parser"
+	"github.com/yuin/goldmark/v2/renderer/html"
 )
 
 var (
@@ -36,14 +36,19 @@ var (
 		Template:    `{{ markdown "# headline" }}`,
 	}
 
-	markdownRenderer = goldmark.New(
-		goldmark.WithExtensions(
-			extension.GFM,
-			extension.DefinitionList,
-			extension.Typographer,
+	markdownParser = parser.New(
+		parser.WithExtensions(
+			extension.NewGFMParser(),
+			extension.NewDefinitionListParser(),
+			extension.NewTypographerParser(),
 		),
-		goldmark.WithRendererOptions(
-			html.WithXHTML(),
+	)
+
+	markdownRenderer = html.New(
+		html.WithXHTML(),
+		html.WithExtensions(
+			extension.NewGFMHTMLRenderer(),
+			extension.NewDefinitionListHTMLRenderer(),
 		),
 	)
 )
@@ -76,7 +81,8 @@ func tplExtractMarkdownFrontmatter(content string) (matter map[string]any, err e
 func tplMarkdown(content string) (string, error) {
 	var buf bytes.Buffer
 
-	if err := markdownRenderer.Convert([]byte(content), &buf); err != nil {
+	source := []byte(content)
+	if err := markdownRenderer.Render(&buf, source, markdownParser.Parse(source)); err != nil {
 		return "", fmt.Errorf("rendering markdown: %w", err)
 	}
 
