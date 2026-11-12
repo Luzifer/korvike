@@ -1,3 +1,13 @@
+# 1.3.1 / 2026-11-13
+
+* Improvements
+  * chore: document safe functions and deprecations
+
+* Bugfixes
+  * fix(sec): prohibit embedded HTML and unsafe links
+  * chore: update github.com/Luzifer/korvike/functions to v1.3.1
+  * chore: update github.com/yuin/goldmark/v2 to v2.1.16
+
 # 1.3.0 / 2026-11-12
 
 * New Features
