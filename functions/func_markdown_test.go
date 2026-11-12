@@ -42,8 +42,22 @@ func TestExtractMarkdownFrontmatter(t *testing.T) {
 func TestMarkdown(t *testing.T) {
 	assert.Equal(
 		t,
-		"<h1>Heading</h1>\n\n<p><strong>bold</strong> and <em>italic</em></p>\n",
+		"<h1>Heading</h1>\n<p><strong>bold</strong> and <em>italic</em></p>\n",
 		renderHelper(t, `{{ markdown .raw }}`, map[string]any{"raw": "# Heading\n\n**bold** and *italic*"}),
+	)
+
+	// Unsafe URLs must not be rendered into links.
+	assert.Equal(
+		t,
+		"<p><a href=\"\">click</a></p>\n",
+		renderHelper(t, `{{ markdown .raw }}`, map[string]any{"raw": "[click](javascript:alert(1))"}),
+	)
+
+	// Embedded HTML must not be rendered into the output.
+	assert.Equal(
+		t,
+		"<!-- raw HTML omitted -->\n",
+		renderHelper(t, `{{ markdown .raw }}`, map[string]any{"raw": "<script>alert('xss')</script>"}),
 	)
 }
 

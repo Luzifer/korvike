@@ -7,8 +7,8 @@ require (
 	github.com/adrg/frontmatter v0.2.0
 	github.com/hashicorp/vault/api v1.23.0
 	github.com/mitchellh/go-homedir v1.1.0
-	github.com/russross/blackfriday/v2 v2.1.0
 	github.com/stretchr/testify v1.12.1
+	github.com/yuin/goldmark v1.8.7
 	go.yaml.in/yaml/v3 v3.0.6
 )
 

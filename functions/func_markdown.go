@@ -1,11 +1,14 @@
 package functions
 
 import (
+	"bytes"
 	"fmt"
 	"strings"
 
 	"github.com/adrg/frontmatter"
-	"github.com/russross/blackfriday/v2"
+	"github.com/yuin/goldmark"
+	"github.com/yuin/goldmark/extension"
+	"github.com/yuin/goldmark/renderer/html"
 )
 
 var (
@@ -32,6 +35,17 @@ var (
 		Description: "Format the source using a Markdown parser.",
 		Template:    `{{ markdown "# headline" }}`,
 	}
+
+	markdownRenderer = goldmark.New(
+		goldmark.WithExtensions(
+			extension.GFM,
+			extension.DefinitionList,
+			extension.Typographer,
+		),
+		goldmark.WithRendererOptions(
+			html.WithXHTML(),
+		),
+	)
 )
 
 func init() {
@@ -59,6 +73,12 @@ func tplExtractMarkdownFrontmatter(content string) (matter map[string]any, err e
 	return matter, nil
 }
 
-func tplMarkdown(name string) string {
-	return string(blackfriday.Run([]byte(name)))
+func tplMarkdown(content string) (string, error) {
+	var buf bytes.Buffer
+
+	if err := markdownRenderer.Convert([]byte(content), &buf); err != nil {
+		return "", fmt.Errorf("rendering markdown: %w", err)
+	}
+
+	return buf.String(), nil
 }
