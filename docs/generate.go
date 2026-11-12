@@ -14,58 +14,42 @@ import (
 	"text/template"
 
 	"github.com/sirupsen/logrus"
-	"go.yaml.in/yaml/v4"
+
+	"github.com/Luzifer/korvike/functions"
 )
 
 type (
-	docFile struct {
-		Header    string    `yaml:"header"`
-		Functions []docFunc `yaml:"functions"`
-	}
-
-	docFunc struct {
-		Title       string            `yaml:"title"`
-		Description string            `yaml:"description"`
-		Environ     map[string]string `yaml:"environ"`
-		PreCommands []string          `yaml:"preCommands"`
-		Vars        map[string]string `yaml:"vars"`
-		Template    string            `yaml:"template"`
-		Output      string            `yaml:"output"`
-	}
+	docFunc functions.FunctionDocumentation
 )
 
 var (
-	//go:embed docs.yaml
-	docSrc string
+	//go:embed header.md
+	docHeader string
 
 	//go:embed func.gotmpl
 	docTpl string
 )
 
 func main() {
-	var (
-		doc docFile
-		err error
-	)
+	var err error
 
 	if os.Getenv("KORVIKE") == "" {
 		logrus.Fatal("provide path to `korvike` binary in $KORVIKE")
 	}
 
-	if err = yaml.NewDecoder(strings.NewReader(docSrc)).Decode(&doc); err != nil {
-		logrus.WithError(err).Fatal("parsing config")
-	}
+	funcs := functions.GetFunctionDocumentation()
 
-	slices.SortFunc(doc.Functions, func(a, b docFunc) int {
+	slices.SortFunc(funcs, func(a, b functions.FunctionDocumentation) int {
 		return strings.Compare(a.Title, b.Title)
 	})
 
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
-	fmt.Println(doc.Header) //nolint:forbidigo // intended to write docs to stdout
+	fmt.Println(docHeader) //nolint:forbidigo // intended to write docs to stdout
 
-	for _, df := range doc.Functions {
+	for _, f := range funcs {
+		df := docFunc(f)
 		logger := logrus.WithField("func", df.Title)
 
 		if err = df.run(ctx); err != nil {

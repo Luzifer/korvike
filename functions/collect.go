@@ -22,7 +22,7 @@ var (
 )
 
 //revive:disable-next-line:flag-parameter // Safety is registry metadata, not control flow chosen by callers.
-func registerFunction(name string, f any, isSafe bool) {
+func registerFunction(name string, f any, isSafe bool, doc ...FunctionDocumentation) {
 	templateFunctionsLock.Lock()
 	defer templateFunctionsLock.Unlock()
 
@@ -30,6 +30,12 @@ func registerFunction(name string, f any, isSafe bool) {
 
 	if isSafe {
 		templateFunctionsSafe[name] = f
+	}
+
+	if len(doc) > 0 {
+		d := doc[0]
+		d.Safe = isSafe
+		registeredDocumentation = append(registeredDocumentation, d)
 	}
 }
 
